@@ -10,6 +10,12 @@ export default function GameMenu() {
     const [setup, setSetup] = React.useState(false);
     const [start, setStart] = React.useState(false);
 
+    function goToMenu(){
+        setSetup(false);
+        setStart(false);
+        setMenu(true);
+    }
+
     return (
         <Container>
             { menu ?
@@ -17,7 +23,7 @@ export default function GameMenu() {
                 <p onClick={()=>{setStart(true);setMenu(false)}}>START GAME</p>
                 <p onClick={()=>{setSetup(true);setMenu(false)}}>SETUP</p>
             </div>
-            : setup ? <Setup/> : <Start/> }
+            : setup ? <Setup/> : <Start goToMenu={goToMenu}/> }
         </Container>
     )
 }

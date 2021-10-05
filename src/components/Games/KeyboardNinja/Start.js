@@ -1,9 +1,12 @@
 import styled from "styled-components";
-import React from "react";
+import React, { useEffect } from "react";
 import randomWords from "random-words";
+import useInterval from "use-interval";
 import $ from "jquery";
 
-export default function Start() {
+export default function Start(props) {
+
+    const {goToMenu} = props;
 
     const [nextWord, setNextWord] = React.useState(randomWords());
     const [word, setWord] = React.useState(randomWords());
@@ -11,13 +14,24 @@ export default function Start() {
     const [score, setScore] = React.useState(0);
     const [timer, setTimer] = React.useState(30);
     const [gameRunning, setGameRunning] = React.useState(false);
+    const [gameEnd, setGameEnd] = React.useState(false);
     const wordToArray = word.split("");
 
-    React.useEffect(()=>{
-        if(gameRunning){
-
+    useEffect(()=>{
+        if(gameEnd){
+            //axios... blablabla
         }
-    }, [gameRunning]);
+    }, [gameEnd]);
+
+    useInterval(()=>{
+        if(timer === 1){
+            setTimer(timer-1)
+            setGameEnd(true);
+            setGameRunning(false);
+        } else {
+            setTimer(timer-1);
+        }
+    }, gameRunning ? 1000 : null);
 
     function callNextWord() {
         setWord(nextWord);
@@ -25,13 +39,10 @@ export default function Start() {
         $("span").removeClass("red");
         $("span").removeClass("green");
     }
-
-    function start() {
-        setGameRunning(true);
-    }
-
+    
     function checkEachChar(e) {
         console.log(e)
+        if(!gameRunning || gameEnd)return;
         let element = document.querySelector(".letra"+index);
         if(e === wordToArray[index]){
             console.log("acertou");
@@ -53,11 +64,31 @@ export default function Start() {
         }
     }
 
+    function replay() {
+        setIndex(0);
+        setScore(0);
+        setTimer(30);
+        setGameEnd(false);
+        setGameRunning(false);
+        callNextWord();
+    }
+
+    function backToMenu() {
+        replay();
+        goToMenu();
+    }
+
     return(
         <GameContainer autoFocus tabIndex={-1} onKeyDown={(e)=>checkEachChar(e.key)}>
-            { !gameRunning ? <ClickMe onClick={start}>
+            { (!gameRunning && !gameEnd) ? <ClickMe onClick={()=>setGameRunning(true)}>
                 <p>Click Here To Start Typing</p>
-            </ClickMe> : <></>}
+            </ClickMe> 
+            : gameEnd ? 
+            <EndGame>
+                <p>Score: {score}</p>
+                <button onClick={replay}>Play Again</button>
+                <button onClick={backToMenu}>Main Menu</button>
+            </EndGame> : <></> }
             <WordStyles>
                 <p className="word">{wordToArray.map((letter, i)=>(
                     <Letter className={"letra"+i} key={i}>{letter}</Letter>
@@ -74,14 +105,32 @@ export default function Start() {
     )
 }
 
-const ClickMe = styled.div`
-    position: absolute;
-    background:#111;
-    cursor:pointer;
-    color:#bbb;
-    width:400px;
-    height:250px;
-    margin-top: 130px;
+const EndGame = styled.div`
+position: absolute;
+width:100%;
+height: 100%;
+background: #111;
+z-index:10;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+color:#00D700;
+font-size: 40px;
+padding-top: 50px;
+button{
+    background: #00D700;
+    border: none;
+    border-radius: 3px;
+    width: 150px;
+    height: 30px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    margin-top: 20px;
+    &:hover{
+        color: lightgreen;
+    }
+}
 `
 
 const Letter = styled.span`
@@ -133,4 +182,13 @@ const Score = styled.div`
     span{
         font-size: 14px;
     }
+`
+const ClickMe = styled.div`
+    position: absolute;
+    background:#111;
+    cursor:pointer;
+    color:#bbb;
+    width:400px;
+    height:250px;
+    margin-top: 130px;
 `
