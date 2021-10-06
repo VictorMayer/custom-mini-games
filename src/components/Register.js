@@ -1,14 +1,22 @@
 import styled from "styled-components";
 import React from "react";
+import { useHistory } from "react-router";
 
 export default function Register() {
 
     const [user, setUser] = React.useState({name: "", username:"", email: "", password:"", image:""});
+    const history = useHistory();
     
     function submit(e) {
         e.preventDefault();
-        console.log("dispara a função!")
-        //axios e bla bla bla
+        const body = {
+            name: user.name,
+            user: user.username,
+            email: user.email,
+            password: user.password,
+            image: user.image
+        }
+        console.log(body);
     }
 
     return(
@@ -17,18 +25,19 @@ export default function Register() {
         <Container>
             <form onSubmit={submit}>
                 <label htmlFor="name">Name:</label>
-                <input required type="text" id="name" name="name" placeholder="exemplo: Maria Josefino" value={user.name} onChange={(e)=>setUser({...user, name: e.target.value})}></input>
+                <input type="text" id="name" name="name" placeholder="exemplo: Maria Josefino" value={user.name} onChange={(e)=>setUser({...user, name: e.target.value})}></input>
                 <label htmlFor="user">Username:</label>
-                <input required type="text" id="user" name="user" placeholder="seu apelido" value={user.username} onChange={(e)=>setUser({...user, username: e.target.value})}></input>
+                <input type="text" id="user" name="user" placeholder="seu apelido" value={user.username} onChange={(e)=>setUser({...user, username: e.target.value})}></input>
                 <label htmlFor="email">Email:</label>
-                <input required type="email" id="email" name="email" placeholder="maria.josefino@email.com" value={user.email} onChange={(e)=>setUser({...user, email: e.target.value})}></input>
+                <input type="email" id="email" name="email" placeholder="maria.josefino@email.com" value={user.email} onChange={(e)=>setUser({...user, email: e.target.value})}></input>
                 <label htmlFor="password">Password:</label>
-                <input required type="password" id="password" name="password" placeholder="senha123" value={user.password} onChange={(e)=>setUser({...user, password: e.target.value})}></input>
-                <label htmlFor="avatar">Avatar:* </label>
+                <input type="password" id="password" name="password" placeholder="senha123" value={user.password} onChange={(e)=>setUser({...user, password: e.target.value})}></input>
+                <label htmlFor="avatar">Avatar: </label>
                 <input type="url" id="avatar" name="avatar" placeholder="URL: optional" value={user.image} onChange={(e)=>setUser({...user, image: e.target.value})}></input>
                 <button onClick={submit} type="submit">Register</button>
             </form>
         </Container>
+        <p onClick={()=>history.push("/sign-in")}>Already have an account? Click here to Login</p>
         </Page>
     )
 }
@@ -44,7 +53,6 @@ min-height: 700px;
 min-width:500px;
 font-weight:700;
 font-size: 35px;
-margin-top: 40px;
 padding-top: 20px;
 form{
     text-align: start;
@@ -98,4 +106,22 @@ const Page = styled.div`
     font-size: 60px;
     font-weight: 700;
     text-align: center;
+    p:first-child{
+        margin-bottom: 40px;
+        cursor: default;
+        &:hover{
+            margin-bottom: 28px;
+            font-size: 70px;
+
+        }
+    }
+    p:last-child{
+        margin-top: 40px;
+        font-size: 30px;
+        cursor: pointer;
+        &:hover{
+            font-size: 33px;
+            text-decoration: underline;
+        }
+    }
 `
