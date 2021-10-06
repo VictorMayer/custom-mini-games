@@ -10,4 +10,5 @@ body{
     background: radial-gradient(#f3aca9, #f005df);
     display: flex;
     justify-content: center;
+    font-family: 'Amatic SC', cursive;
 }
