@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import React from "react";
 import { loginUser } from "../services/CustomMinigames";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
-
     const [user, setUser] = React.useState({ login: "", password:"" });
+    const navigate = useNavigate();
     
     function submit(e) {
         e.preventDefault();
@@ -26,6 +27,7 @@ export default function Register() {
                 <button onClick={submit} type="submit">Login</button>
             </form>
         </Container>
+        <p onClick={()=>navigate("/sign-up")}>Don't have an Account? Create yours now!</p>
         </Page>
     )
 }
