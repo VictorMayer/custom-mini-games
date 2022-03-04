@@ -1,14 +1,17 @@
 import styled from "styled-components";
 import React from "react";
+import { newUser } from "../services/CustomMinigames";
 
 export default function Register() {
 
-    const [user, setUser] = React.useState({name: "", username:"", email: "", password:"", image:""});
+    const [user, setUser] = React.useState({name: "", username:"", email: "", password:"", avatar:""});
     
     function submit(e) {
         e.preventDefault();
-        console.log("dispara a função!")
-        //axios e bla bla bla
+        newUser(user)
+            .then(answer => {})
+            .catch(answer => console.log(answer.response.data));
+        return;
     }
 
     return(
@@ -25,7 +28,7 @@ export default function Register() {
                 <label htmlFor="password">Password:</label>
                 <input required type="password" id="password" name="password" placeholder="senha123" value={user.password} onChange={(e)=>setUser({...user, password: e.target.value})}></input>
                 <label htmlFor="avatar">Avatar:* </label>
-                <input type="url" id="avatar" name="avatar" placeholder="URL: optional" value={user.image} onChange={(e)=>setUser({...user, image: e.target.value})}></input>
+                <input type="url" id="avatar" name="avatar" placeholder="URL: optional" value={user.avatar} onChange={(e)=>setUser({...user, avatar: e.target.value})}></input>
                 <button onClick={submit} type="submit">Register</button>
             </form>
         </Container>
@@ -88,7 +91,7 @@ form{
             font-weight: 400;
             font-size: 26px;
             text-align: start;
-            color:#bbb;
+            color:#888;
         }
     }
 }

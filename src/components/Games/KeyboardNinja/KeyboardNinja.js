@@ -1,13 +1,21 @@
-import styled from "styled-components"
+import styled from "styled-components";
 import GameMenu from "./GameMenu.js";
+import PageFooter from '../PageFooter.js';
+import { useEffect } from "react";
 
 export default function KeyboardNinja() {
+
+    useEffect(() => {
+        
+    }, []);
+
     return (
         <Page>
             <p>Keyboard Typer Ninja</p>
             <GameContainer>
                 <GameMenu/>
             </GameContainer>
+            <PageFooter/>
         </Page>
     )
 }
@@ -35,4 +43,7 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+p {
+    cursor: default;
+}
 `

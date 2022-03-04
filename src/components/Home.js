@@ -1,17 +1,22 @@
 import styled from "styled-components";
-import { useHistory } from "react-router";
+import { useEffect, useState } from "react";
+import { getGames } from "../services/CustomMinigames";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+    const [games, setGames] = useState([]);
+    const navigate = useNavigate();
 
-    const history = useHistory();
-
-    function goToGame(game) {
-        console.log(game);
-        switch (game) {
-            case 1: history.push("/keyboard-typer-ninja");break;
-            default: break;
-        }
-    }
+    useEffect(() => {
+        getGames()
+            .then(answer => {
+                console.log(answer.data);
+                setGames(answer.data);
+            })
+            .catch(answer => {
+                console.log(answer.response);
+            });
+    }, []);
 
     return (
         <HomeContainer>
@@ -19,9 +24,12 @@ export default function Home() {
                 Custom Mini-Games
             </Logo>
             <MenuContainer>
-                <p className="game-opt" onClick={()=>goToGame(1)} >keyboard typer ninja</p>
-                <p className="game-opt" onClick={()=>goToGame(2)} >Cursor Dodger</p>
-                <p className="game-opt" onClick={()=>goToGame(3)} >Aimbot Trainer</p>
+                <p className="game-opt" onClick={()=>navigate("/games/1")} >keyboard typer ninja</p>
+                <p className="game-opt" onClick={()=>navigate('x')} >Cursor Dodger</p>
+                <p className="game-opt" onClick={()=>navigate('x')} >Aimbot Trainer</p>
+                {games.map((g, i) => (
+                    <p className="game-opt" key={i} onClick={() => navigate(g.id)}>{g.name}</p>
+                ))}
             </MenuContainer>
         </HomeContainer>
     )
@@ -61,6 +69,7 @@ font-weight: 700;
 font-size: 70px;
 color:#111;
 text-align: center;
+cursor: default;
 &::selection{
     background-color:#f3aca9;
     color:#fff;
