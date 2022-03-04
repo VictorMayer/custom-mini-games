@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import GameMenu from "./GameMenu.js";
-import PageFooter from '../PageFooter.js';
+import GameMenu from "../../components/games/KeyboardNinja/GameMenu.js";
+import PageFooter from '../../components/PageFooter.js';
 import { useEffect } from "react";
 
 export default function KeyboardNinja() {

@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Home from "./components/Home.js";
-import Login from "./components/Login.js";
-import Register from "./components/Register.js";
-import KeyboardNinja from "./components/Games/KeyboardNinja/KeyboardNinja.js";
+import Home from "./pages/Home.js";
+import Login from "./pages/Login.js";
+import Register from "./pages/Register.js";
+import KeyboardNinja from "./pages/Games/KeyboardNinja.js";
 
-import "./App.css";
+import "./assets/App.css";
 
 function App() {
   return (
