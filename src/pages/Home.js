@@ -24,11 +24,8 @@ export default function Home() {
                 Custom Mini-Games
             </Logo>
             <MenuContainer>
-                <p className="game-opt" onClick={()=>navigate("/games/1")} >keyboard typer ninja</p>
-                <p className="game-opt" onClick={()=>navigate('x')} >Cursor Dodger</p>
-                <p className="game-opt" onClick={()=>navigate('x')} >Aimbot Trainer</p>
                 {games.map((g, i) => (
-                    <p className="game-opt" key={i} onClick={() => navigate(g.id)}>{g.name}</p>
+                    <p className="game-opt" key={i} onClick={() => navigate(`/games/${g.id}`)}>{g.name}</p>
                 ))}
             </MenuContainer>
         </HomeContainer>
