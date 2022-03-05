@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
-import { getGames } from "../services/CustomMinigames";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState, } from "react";
+import { getGames } from "../services/CustomMinigames";
 
 export default function Home() {
-    const [games, setGames] = useState([]);
     const navigate = useNavigate();
+    const [games, setGames] = useState([]);
 
     useEffect(() => {
         getGames()
