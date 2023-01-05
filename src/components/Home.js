@@ -9,6 +9,7 @@ export default function Home() {
         console.log(game);
         switch (game) {
             case 1: history.push("/keyboard-typer-ninja");break;
+            case 3: history.push("/the-mind");break;
             default: break;
         }
     }
@@ -21,7 +22,8 @@ export default function Home() {
             <MenuContainer>
                 <p className="game-opt" onClick={()=>goToGame(1)} >keyboard typer ninja</p>
                 <p className="game-opt" onClick={()=>goToGame(2)} >Cursor Dodger</p>
-                <p className="game-opt" onClick={()=>goToGame(3)} >Aimbot Trainer</p>
+                <p className="game-opt" onClick={()=>goToGame(3)} >The Mind</p>
+                <p className="game-opt" onClick={()=>goToGame(4)} >Aimbot Trainer</p>
             </MenuContainer>
         </HomeContainer>
     )

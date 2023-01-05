@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import { GameContainer, Page } from "../../shared/containers.js";
 import GameMenu from "./GameMenu.js";
 
 export default function KeyboardNinja() {
@@ -11,28 +11,3 @@ export default function KeyboardNinja() {
         </Page>
     )
 }
-
-const GameContainer = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-margin-top: 100px;
-width: 750px;
-height: 500px;
-background: radial-gradient(#eee, #ccc);
-border-radius: 15px;
-padding: 50px;
-`
-
-const Page = styled.div`
-margin-top: 20px;
-font-family: 'Amatic SC', cursive;
-font-weight: 700;
-font-size: 34px;
-width:1000px;
-text-align: center;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-`
