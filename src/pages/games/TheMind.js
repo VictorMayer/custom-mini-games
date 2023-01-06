@@ -1,3 +1,4 @@
+import PageFooter from "../../components/PageFooter"
 import { GameContainer, Page, TheMindContainer } from "../../components/_shared/containers"
 
 export default function TheMind() {
@@ -9,6 +10,7 @@ export default function TheMind() {
                     
                 </TheMindContainer>
             </GameContainer>
+            <PageFooter/>
         </Page>
     )
 }
