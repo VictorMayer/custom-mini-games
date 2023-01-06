@@ -1,24 +1,32 @@
-import React from "react";
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Home from "./components/Home.js";
-import Login from "./components/Login.js";
-import Register from "./components/Register.js";
-import TheMind from "./components/Games/TheMind/TheMind.js";
-import KeyboardNinja from "./components/Games/KeyboardNinja/KeyboardNinja.js";
+import { BrowserRouter as Router, Route, Navigate, Routes } from 'react-router-dom';
+import { useState } from 'react';
+import Home from "./pages/Home.js";
+import Login from "./pages/Login.js";
+import Register from "./pages/Register.js";
+import TheMind from './pages/games/TheMind.js';
+import KeyboardNinja from "./pages/games/KeyboardNinja.js";
+import UserContext from './contexts/UserContext.js';
 
-import "./App.css";
+import "./assets/App.css";
 
 function App() {
+    const [userInfo, setUserInfo] = useState({ token: "" });
+
   return (
-    <BrowserRouter>
-        <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/sign-up" exact component={Register} />
-            <Route path="/sign-in" exact component={Login} />
-            <Route path="/the-mind" exact component={TheMind} />
-            <Route path="/keyboard-typer-ninja" exact component={KeyboardNinja} />
-        </Switch>
-    </BrowserRouter>
+    <UserContext.Provider value={{ userInfo, setUserInfo }}>
+        <Router>
+            <Routes>
+                <Route path="/sign-up" exact element={<Register/>} />
+                <Route path="/sign-in" exact element={<Login/>} />
+
+                <Route path="/games/1" exact element={<KeyboardNinja/>} />
+                <Route path="/games/2" exact element={<TheMind/>} />
+
+                <Route path="/games" exact element={<Home/>} />
+                <Route path="/*" element={<Navigate to="/games" replace />} />
+            </Routes>
+        </Router>
+    </UserContext.Provider>
   );
 }
 

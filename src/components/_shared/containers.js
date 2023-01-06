@@ -9,7 +9,7 @@ width: 750px;
 height: 500px;
 background: radial-gradient(#eee, #ccc);
 border-radius: 15px;
-padding: 50px;
+padding: 40px;
 `;
 
 const KeyboardNinjaContainer = styled.div`
@@ -49,8 +49,19 @@ justify-content: center;
 align-items: center;
 `;
 
+const TheMindContainer = styled.div`
+background: #bbb;
+width:100%;
+height:100%;
+display:flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+`;
+
 export {
     KeyboardNinjaContainer,
+    TheMindContainer,
     GameContainer,
     Page,
 }

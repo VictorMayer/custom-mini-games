@@ -2,7 +2,7 @@ import React from "react";
 
 import Setup from "./Setup.js";
 import Start from "./Start.js";
-import { KeyboardNinjaContainer } from "../../shared/containers.js";
+import { KeyboardNinjaContainer } from "../../_shared/containers.js";
 
 export default function GameMenu() {
 
